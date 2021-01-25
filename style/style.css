@@ -1,0 +1,263 @@
+body {
+    background-color: #f8f8f8;
+    font-family: "Times New Roman";
+    margin: 0 auto;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background: url(../foto/img.jpeg);
+}
+
+.header {
+    padding-top: 0;
+    height: 70px;
+}
+
+.header img {
+    margin-top: 20px;
+    margin-left: 40px;
+    float: left;
+}
+
+.menu li {
+    display: inline-block;
+    padding-right: 14px;
+    padding-top: 24px;
+    float: right;
+}
+
+.body {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.bracelets,
+.rings {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.bracelets_name {
+    float: left;
+    position: relative;
+    top: 25px;
+    left: 80px;
+    z-index: 1;
+}
+
+.rings_name {
+    float: left;
+    position: relative;
+    top: 25px;
+    left: 60px;
+    z-index: 1;
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+    font-family: cursive;
+    font-size: 22px;
+}
+
+.menu a:hover {
+    color: skyblue;
+}
+
+h4 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    background: #eaeaea;
+    margin-top: 0;
+}
+
+.name {
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.footer {
+    background: url(../foto/img.jpeg);
+    height: 30px;
+    margin: 0 auto;
+    text-align: right;
+    padding-right: 14px;
+    padding-top: 15px;
+    
+}
+
+
+.short {
+    float: right;
+    color: #707070;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+.short:first-letter {
+    font-size: 2em;
+    font-family: cursive;
+}
+
+.special {
+    color: #707070;
+    font-size: 14px;
+    font-style: italic;
+    text-align: left;
+    padding-right: 130px;
+    padding-left: 110px;
+    line-height: 16px;
+}
+
+.details {
+    color: #484343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+    list-style-position: inside;
+    list-style-image: url("../foto/icon.png");
+}
+
+.goods {
+    margin-left: 50px;
+    margin-top: 40px;
+    outline: 10px solid lightgrey;
+}
+
+.goods:hover {
+    outline: none;
+}
+
+.content {
+    position: relative;
+}
+
+.text {
+    float: right;
+    position: absolute;
+    top: 20px;
+    left: 500px;
+}
+
+.btn1:hover{
+    color: #fff;
+    background: #97CE68;
+}
+
+.btn2:hover{
+    color: #fff;
+    background: #FDC9F7;
+}
+
+.btn1,
+.btn2 {
+    font-weight: 800;
+    font-size: 15px;
+    color: white;
+    background: grey;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    text-decoration: none;
+    box-shadow: 0 -3px lightgrey inset;
+    margin-top: 30px;
+    height: 50px;
+    width: 255px;
+}
+
+
+form {
+    text-align: justify-all;
+    font-family: fantasy;
+    border: 2px solid grey;
+    margin: 0 auto;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+span {
+    padding-left: 15%;
+    padding-right: 15%;
+    font-style: italic;
+}
+
+input,
+select {
+    width: 180px;
+}
+
+input[type="text"],
+textarea[type="text"] {
+    text-transform: capitalize;
+}
+
+input[type="email"]:focus {
+    background: lightgrey;
+    color: black;
+}
+
+input[type="submit"]:hover {
+    background: #97CE68;
+    color: black;
+}
+
+input[type="reset"]:hover {
+    background: #CD3E29;
+    color: black;
+}
+
+textarea {
+    width: 190px;
+    height: 100px;
+}
+
+h1 {
+    text-shadow: 5px 5px 10px darkgrey;
+    /* Добавление тени */
+}
+
+div {
+    padding-bottom: 2%;
+    padding-top: 2%
+}
+
+.check_table {
+    border: 2px solid #707070;
+    border-spacing: 0;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto; //*вырванивает таблицу по центру*//
+}
+
+.check_table td {
+    border: 2px solid #707070;
+    height: 30px;
+    width: 150px;
+}
+
+.first_row td:first-of-type {
+    border-top-left-radius: 8px;
+}
+
+.first_row td:last-child {
+    border-top-right-radius: 8px;
+}
+
+.last_row td:first-of-type {
+    border-bottom-left-radius: 8px;
+}
+
+.last_row td:last-child {
+    border-bottom-right-radius: 8px;
+}
