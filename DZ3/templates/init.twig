@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ title }} ></title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+</head>
+
+<body>
+    <div class="main">
+        {% include 'header.twig' %}
+        <h1 class="name"><i>Jewellery from <q>{{ title }}</q></i></h1><br>
+        <h2 class="name"><i>Catalog</q></i></h2><br>
+            <div class="content">
+
+                {% if products %} 
+                {% for product in products %} 
+                <div class="product">
+                    <a href="product.php?id={{ product.id }}">
+                    <img src="{{ product.path }}" height="300"></a>
+                    <span> Price: {{ product.price }}</span>
+                </div>
+                {% endfor %}
+                    {% else %} 
+                    <b>Список товаров отсутсвует</b>
+                {% endif %}
+            </div>
+    </div>
+    {% include 'footer.twig' %}
+</body>
+</html>
