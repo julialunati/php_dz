@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ title }} ></title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+</head>
+
+<body>
+    <div class="main">
+        {% include 'header.twig' %}
+        <h2 class="name"><i>Cart</q></i></h2>
+        <div class="cart">
+       
+            {% if products %} 
+            {% for product in products %} 
+            
+            <div class="cartProduct">
+                <img src="{{ product.path }}" height="200">
+                <div> Name: {{ product.name }} </div>
+                <div> Price: {{ product.price }} </div>
+                <div> Quantity: {{ product.quantity }}</div>
+                <div> Total price: {{ product.total }} €</div>
+
+                <form enctype="multipart/form-data" method="post" action="">
+                <input type="submit" name="delete" value="DELETE">
+                </form>
+            </div>
+            <br>
+
+            {% endfor %}
+
+            <div>TOTAL: {{ finalTotal }} €</div>
+            <form enctype="multipart/form-data" method="post" action="">
+            <input type="submit" name="submit" value="CHECKOUT"></form>
+
+            {% else %} 
+
+            <br><div>YOUR CART IS EMPTY</div>
+            <a href="index.php">Go to shopping</a>
+
+            {% endif %}
+
+        </div>
+    </div>
+    {% include 'footer.twig' %}
+</body>
+</html>

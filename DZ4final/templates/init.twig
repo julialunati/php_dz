@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ title }} ></title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <style>
+        #showmore-list{
+            display: flex;
+            justify-content: space-evenly;
+            align-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        {% include 'header.twig' %}
+        <h1 class="name"><i>Jewellery from <q>{{ title }}</q></i></h1><br>
+        <h2 class="name"><i>Catalog</q></i></h2><br>
+            <div class="content">
+
+                {% if products %} 
+                {% for product in products %} 
+                <div class="product">
+                    <a href="product.php?id={{ product.id }}">
+                    <img src="{{ product.path }}" height="300"></a>
+                    <span> Price: {{ product.price }}</span>
+                </div>
+
+                {% endfor %}
+                {% else %} 
+                    <b>Список товаров отсутсвует</b>
+                {% endif %}
+            </div>
+
+            <div id="showmore-list"></div>   
+          
+	        <a data-count="1" data-max="{{ amount }}" id="showmore-button" href="#">Show more</a>
+            <div id="final-text"></div>  
+
+    </div>
+    {% include 'footer.twig' %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+	    $('#showmore-button').click(function(){
+		    var $target = $(this);
+            var count = $target.attr('data-count');	
+		    count++;
+
+		$.ajax({ 
+			url: 'loadProduct.php?count=' + count,  
+            type: 'GET',
+			dataType: 'html',
+			success: function(data){
+				$('#showmore-list').append(data);
+			}
+		});
+ 
+		$target.attr('data-count', count);
+		if (count ==  $target.attr('data-max')) {
+            $target.hide();
+            $('#final-text').text("That's all products available for now!");
+		}		
+         
+		return false;
+	});
+});
+</script>
+    
+</body>
+</html>
