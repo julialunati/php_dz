@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Time to Shine</title>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
+</head>
+
+<body>
+  <div class="main">
+    {% include 'header3.phtml' %}
+    <div class="content">
+
+      <div class="block"><div id="error">{{ message }}</div></div>
+      <div id="block"><a href="../authorization/">Try one more time</a></div>
+      <div class="block">OR</div>
+      <div id="block"><a href="#">Contact helpDesk</a></div>
+
+    </div>
+    {% include 'footer.phtml' %}
+  </div>
+
+</body>
+
+</html>
