@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time to Shine</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+
+<body>
+  <div class="main">
+    {% include 'header2.phtml' %}
+    <div class="content">
+
+      <div class="block">
+        <h2 class="name"><i>Hi, {{ login }}</i></h2>
+        <h4 class="name">It's nice to see you again!</h4><br>
+
+        <form enctype="multipart/form-data" method="post" action="">
+          <input type="submit" name="logout" value="log out">
+        </form>
+      </div>
+
+      <div class="block">From your account you can manage your orders, returns and contact details.</div><br>
+
+      {% if orders %}
+        {% for order in orders %}
+
+        <div class="orders">
+          <div> Order number: {{ order.order_id }} </div>
+          <div> Product: {{ order.product_id }}</div>
+          <div> Quantity: {{ order.order_qnt }}</div>
+          <div> Total: {{ order.total }} € </div>
+
+          <form class="returnForm" id="{{ order.id }}" method="post" enctype="multipart/form-data">
+            <input type="submit" class="button" value="Return Item">
+          </form>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div>No orders in DB</div>
+
+        {% endif %}
+
+      {% include 'link.phtml' %}
+
+    </div>
+
+    {% include 'footer.phtml' %}
+  </div>
+</body>
+
+</html>

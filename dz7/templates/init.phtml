@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Time to Shine</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+  <div class="main">
+    {% include 'header.phtml' %}
+
+    <h1 class="name"><i>Jewellery  from <q>Time to Shine</q></i></h1><br>
+    <p>Greetings! We're glad to see you on our website.<br>
+      Please take a look on our products and chose what is more suitable for you.</p>
+
+    <div class="allproducts">
+
+      {% if products %}
+      {% for product in products %}
+      <div class="product">
+        <a href="product&id={{ product.id }}/">
+          <img src="{{ product.path }}" height="300"></a>
+        <span> Price: {{ product.price }}</span>
+      </div>
+      {% endfor %}
+      {% else %}
+      <b>Список товаров отсутсвует</b>
+      {% endif %}
+    </div>
+
+    {% include 'footer.phtml' %}
+  </div>
+</body>
+
+</html>
