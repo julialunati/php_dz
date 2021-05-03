@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Time to Shine</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
+  <style>
+    #statusChanged {
+      width: 300px;
+      height: 25px;
+      background-color: lightgrey;
+      text-align: center;
+      padding: 15px;
+      border: 1px solid black;
+      border-radius: 10px;
+      color: black;
+      display: none;
+      position: absolute;
+      top: 100px;
+      right: 10px;
+      margin: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="main">
+    {% include 'header2.phtml' %}
+    <div class="ordersContent">
+
+      <div class="block">
+        <h2 class="name"><i>Hi, {{ login }}</i></h2>
+        <form enctype="multipart/form-data" method="post" action="../">
+          <input type="submit" name="logout" value="log out">
+        </form>
+      </div>
+
+      <div id="statusChanged"></div>
+
+      <h4 class="name">List of orders</h4><br>
+
+      {% if orders %}
+      {% for order in orders %}
+
+      <div class="orders">
+        <div> Order number: {{ order.order_id }} </div>
+        <div> User: {{ order.user_id }} </div>
+        <div> Product: {{ order.product_id }}</div>
+        <div> Quantity: {{ order.order_qnt }}</div>
+        <div> Total: {{ order.total }} € </div>
+
+        <form id="{{ order.id }}" method="post" enctype="multipart/form-data">
+          <label for="status">Order status:</label>
+          <select class="orderStatus">
+            <option selected value="{{ order.order_status }}">{{ order.order_status }}</option>
+            <option value="accepted">accepted</option>
+            <option value="sent">sent</option>
+            <option value="delivered">delivered</option>
+            <option value="cancelled">cancelled</option>
+            <option value="returned">returned</option>
+          </select>
+        </form>
+
+      </div>
+
+      {% endfor %}
+
+      {% else %}
+
+      <div>No orders in DB</div>
+
+      {% endif %}
+
+    </div>
+  </div>
+  {% include 'footer.phtml' %}
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <script>
+    // скрипт убирания задвоенного значения option (с тем option что выбран)
+    $("select.orderStatus").each(function() {
+      var curr = $(this).children("option:selected").val();
+      var opt = $(this).children("option");
+
+      for (var i = 0, max = opt.length; i < max; i++) {
+        if(opt[i].innerHTML == curr && !opt[i].selected){
+          opt[i].remove();
+        }
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("select.orderStatus").change(function() {
+        var status = $(this).children("option:selected").val();
+        var id = this.parentElement.id;
+
+        $.ajax({
+          type: "POST",
+          url: '../change/',
+          data: {
+            id: id,
+            status: status
+          },
+          success: function(response) {
+            var jsonData = JSON.parse(response);
+            // если товар удачно добавлен на бэкенде
+            if (jsonData.success == "1") {
+              document.getElementById('statusChanged').innerHTML = 'The order status is changed';
+              document.getElementById('statusChanged').style.display = "block";
+              //надпись пропадет чере 3 секунды 
+              $('#statusChanged').delay(3000).fadeOut();
+
+            } else {
+              document.getElementById('statusChanged').innerHTML = 'Ooops..Something went wrong!';
+              document.getElementById('statusChanged').style.display = "block";
+              //надпись пропадет чере 3 секунды 
+              $('#statusChanged').delay(3000).fadeOut();
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

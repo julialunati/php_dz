@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Time to Shine</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+
+<body>
+  <div class="main">
+    {% include 'header3.phtml' %}
+    <div class="content">
+
+      <div class="block">
+        <h2 class="name">SIGN IN</h2><br><br>
+        <form id="signIn" enctype="multipart/form-data" method="post" action="">
+          <span>login</span>
+          <input type="login" id="login" name="login" value="">
+          <span>password</span>
+          <input type="text" id="password" name="password" value="">
+          <input type="submit" id="enter" name="enter" value="SIGN IN">
+        </form><br>
+        <div id="error">{{ message }}</div>
+      </div>
+
+      <div class="block"><h2 class="name">OR</h2></div>
+
+      <div class="block">
+        <h2 class="createAccount">
+          <a href="#">CREATE NEW ACCOUNT</a>
+        </h2>
+      </div>
+
+    </div>
+    {% include 'footer.phtml' %}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  
+    $('#enter').click(function(e) {
+      var login = $('#login').val();
+      var password = $('#password').val();
+      if ($.trim(login).length == 0) {
+        document.getElementById('error').innerHTML = 'The login is missing';
+        document.getElementById('login').setAttribute("required", "required");
+        e.preventDefault();
+      }
+      if ($.trim(password).length == 0) {
+        document.getElementById('error').innerHTML = 'The password is missing';
+        document.getElementById('password').setAttribute("required", "required");
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>

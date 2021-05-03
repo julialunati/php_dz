@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time to Shine</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <style>
+      #productAdded {
+        width: 300px;
+        height: 25px;
+        background-color: #9CEE90;
+        text-align: center;
+        padding: 15px;
+        border: 1px solid black;
+        border-radius: 10px;
+        color: black;
+        display: none;
+        position: absolute;
+        top: 100px;
+        right: 10px;
+        margin: auto; 
+      }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+    {% include 'header3.phtml' %}
+        <h1 class="name">Detailed info about the product</h1>
+        <div class="body">
+        <div id="productAdded"></div>
+
+            {% if product %} 
+   
+            <img src="../{{ product.path }}" height="600">
+            <div> Name: {{ product.name }} </div>
+            <div> Price: {{ product.price }} </div>
+            <div> Views: {{ product.view }}</div>
+
+            <form id="addProduct" method="post">
+                <input hidden type="text" name="id" value="{{ product.id }}">
+                <span>Choose quantity:</span>
+                <input type="number" name="quantity" value="" min="1" max="5">
+                <input type="submit" name="add" value="Add to cart">
+            </form>
+
+            {% else %} 
+ 
+            {{ message }}
+
+            {% endif %}
+
+        </div>
+    </div>
+    {% include 'footer.phtml' %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+            $('#addProduct').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: 'addProduct.php',
+                    data: $(this).serialize(),
+                    success: function(response) { 
+                        var jsonData = JSON.parse(response);
+                        // если товар удачно добавлен на бэкенде
+                        if (jsonData.success == "1") {
+                            document.getElementById('productAdded').innerHTML = 'Product added to your shopping cart!';
+                            document.getElementById('productAdded').style.display = "block";
+                            //надпись пропадет чере 3 секунды 
+                            $('#productAdded').delay(3000).fadeOut();
+                        } else {
+                            alert('Oops! Something went wrong. Please try again in a moment.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
